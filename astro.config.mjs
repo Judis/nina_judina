@@ -8,6 +8,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://judis.github.io',
-  base: 'nina_hert_front'
+  site: 'https://judis.github.io'
 });
