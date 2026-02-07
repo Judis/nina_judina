@@ -7,5 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+  site: 'https://judis.github.io',
+  base: 'nina_hert_front'
 });
