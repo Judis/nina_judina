@@ -109,7 +109,7 @@ const nextWork = artworks[artworks.findIndex(a => a.id === artwork.id) + 1] || n
     <div class="grid grid-cols-4 sm:grid-cols-6 gap-6">
       {randomArtworks.map((art) => (
         <a href={`/nina_hert_front/${art.documentId}`} class="group block rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100 hover:shadow-lg transition">
-          <img src={STRAPI_URL + art.photo.url} alt={art.title} class="object-cover w-full aspect-[4/5] group-hover:scale-105 transition" />
+          <img src={art.photo.url} alt={art.title} class="object-cover w-full aspect-[4/5] group-hover:scale-105 transition" />
         </a>
       ))}
     </div>
