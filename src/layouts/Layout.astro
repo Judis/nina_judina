@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import facebook from '../assets/facebook.svg';
+import instagram from '../assets/instagram.svg';
+import Contacts from '../components/Contacts.astro';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nina Judina - Aquarellmalerei und Zeichnung</title>
+
+  <meta name="description" content="Aquarellbilder und Zeichnungen von Nina Judina. Stimmungsvolle Landschaften, urbane Motive und persönliche Arbeiten in einer minimalistischen Online-Galerie.">
+  <meta name="keywords" content="nina judina, aquarell, aquarellmalerei, aquarellbilder, zeichnung, künstlerinnen, kunst aus deutschland, landschaftsaquarell, urbane skizzen">
+
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://nina-judina.de/">
+
+  <meta property="og:title" content="Nina Judina - Aquarellmalerei und Zeichnung">
+  <meta property="og:description" content="Online-Galerie mit Aquarellen und Zeichnungen von Nina Judina. Auswahl aktueller Arbeiten und Kontaktmöglichkeiten.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nina-judina.de/">
+  <meta property="og:locale" content="de_DE">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Nina Judina - Aquarellmalerei und Zeichnung">
+  <meta name="twitter:description" content="Aquarellbilder und Zeichnungen von Nina Judina in einer reduzierten, klaren Präsentation.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- Header / Nav -->
+  <header>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand -->
+        <a href="/" class="text-sm font-medium tracking-[0.2em] uppercase">
+          Nina Judina
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="flex items-center gap-2 md:gap-8 text-sm">
+          <a href="/#work" class="hover:text-neutral-600 transition">Gemälde</a>
+          <a href="/#contact" class="hover:text-neutral-600 transition">Kontakte</a>
+        </nav>
+
+        <!-- Social -->
+        <div class="hidden md:flex items-center gap-4 text-xs tracking-wide uppercase">
+          <a href="https://www.instagram.com/hertnina/" class="hover:text-neutral-600 transition">
+            <img src={instagram.src} alt="Instagram" class="inline w-4 h-4 mr-1">
+            Instagram
+          </a>
+          <a href="https://facebook.com/110797930686859" class="hover:text-neutral-600 transition">
+            <img src={facebook.src} alt="Facebook" class="inline w-4 h-4 mr-1">
+            Facebook
+          </a>
+        </div>
+
+        <!-- Mobile menu button (визуальный, без JS-логики) -->
+        <div class="flex md:hidden items-center gap-2 text-xs tracking-wide uppercase">
+          <a href="https://www.instagram.com/hertnina/" class="hover:text-neutral-600 transition">
+            <img src={instagram.src} alt="Instagram" class="inline w-4 h-4 mr-1">
+          </a>
+          <a href="https://facebook.com/110797930686859" class="hover:text-neutral-600 transition">
+            <img src={facebook.src} alt="Facebook" class="inline w-4 h-4 mr-1">
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 space-y-8">
+		<slot />
+    <Contacts />
+  </main>
+</body>
+</html>

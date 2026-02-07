@@ -1,0 +1,81 @@
+---
+import { client } from "../lib/strapi";
+
+const { data: artworks } = await client.collection("artworks").find({
+  populate: "*",
+});
+---
+<!-- Work -->
+<section id="work" aria-labelledby="work-heading" class="space-y-8 mt-6">
+	<div class="flex items-baseline justify-between gap-4">
+		<h1 id="work-heading" class="text-sm font-medium tracking-[0.3em] uppercase">
+			Gemälde
+		</h1>
+	</div>
+
+	<!-- Projects grid -->
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+		<!-- Card template -->
+
+		{artworks.map((artwork, index) => (
+			<article class={`group relative rounded-xl overflow-hidden bg-neutral-900 border border-white/80 hover:shadow-lg transition ${index >= 6 ? "hidden" : ""}`}
+							 data-work-index={index}>
+				<div class="aspect-[4/5] bg-gradient-to-b from-neutral-800 to-neutral-900">
+					<a href={"/" + artwork.documentId}>
+						<img
+							src={artwork.photo.url}
+							alt={artwork.title}
+							class="w-full h-full object-cover group-hover:scale-105 transition"
+						>
+					</a>
+				</div>
+			</article>
+		))}
+	</div>
+	<div class="mt-8 text-center">
+		<button
+			id="load-more"
+			class="inline-flex items-center justify-center rounded-full border border-neutral-900 px-6 py-2 text-xs uppercase tracking-wider bg-neutral-900 text-neutral-200 hover:bg-neutral-700 transition cursor-pointer"
+			type="button"
+		>
+			Load more
+		</button>
+	</div>
+</section>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const BATCH_SIZE = 6;
+
+		const cards = Array.from(document.querySelectorAll('[data-work-index]'));
+		const button = document.querySelector('#load-more');
+
+		if (!button) return;
+
+		let shown = BATCH_SIZE;
+
+		button.addEventListener('click', () => {
+			const nextShown = shown + BATCH_SIZE;
+
+			for (let i = shown; i < nextShown && i < cards.length; i++) {
+				const el = cards[i];
+
+				// 1) включаем в поток
+				el.classList.remove('hidden');
+
+				// 2) фиксируем текущее состояние (opacity 0, translate-y-4)
+				// void el.offsetWidth; // reflow
+
+				// 3) запускаем анимацию
+				el.classList.remove('opacity-0', 'translate-y-4');
+			}
+
+			shown = Math.min(nextShown, cards.length);
+
+			if (shown >= cards.length) {
+				button.classList.add('hidden');
+				button.classList.remove('inline-flex');
+			}
+		});
+	});
+</script>

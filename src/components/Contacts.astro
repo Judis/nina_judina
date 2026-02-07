@@ -1,0 +1,64 @@
+---
+---
+<!-- Contact -->
+<section id="contact" aria-labelledby="contact-heading" class="space-y-6 pt-16">
+  <h2 id="contact-heading" class="text-sm font-medium tracking-[0.3em] uppercase">
+    Kontakte
+  </h2>
+
+  <div class="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] items-start">
+    <form class="space-y-4" action="https://formspree.io/f/movyvrew" method="POST">
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="text-xs uppercase tracking-[0.2em] text-neutral-600">
+          Name
+          <input
+            name="name"
+            type="text"
+            class="mt-1 w-full bg-neutral-200 border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-black/40 tracking-normal"
+          >
+        </label>
+        <label class="text-xs uppercase tracking-[0.2em] text-neutral-600">
+          E-mail
+          <input
+            name="email"
+            type="email"
+            class="mt-1 w-full bg-neutral-200 border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-black/40 tracking-normal"
+          >
+        </label>
+      </div>
+
+      <label class="text-xs uppercase tracking-[0.2em] text-neutral-600 block">
+        Nachricht
+        <textarea
+          name="message"
+          rows="5"
+          class="mt-1 w-full bg-neutral-200 border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-black/40 tracking-normal"
+        ></textarea>
+      </label>
+
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center rounded-full border border-neutral-900 px-6 py-2 text-xs uppercase tracking-wider bg-neutral-900 text-neutral-200 hover:bg-neutral-700 transition"
+      >
+        Senden
+      </button>
+    </form>
+
+    <div class="space-y-3 text-sm text-neutral-600">
+      <p class="md:mt-24">
+        Für Bestellungen, den Kauf von Bildern, Ausstellungsanfragen oder Druckanfragen nutzen Sie das Formular oder kontaktieren Sie mich direkt.
+      </p>
+      <p class="text-neutral-600">
+        <a href="mailto:ninahert@gmail.com" class="hover:underline">ninahert@gmail.com</a>
+      </p>
+    </div>
+  </div>
+
+  <footer class="border-t border-neutral-200 pt-8 mt-12 text-xs text-neutral-500 flex flex-col md:flex-row items-center justify-between gap-4">
+    <span>&copy; 2025 Nina Judina. Alle Rechte vorbehalten.</span>
+    <nav class="flex gap-4">
+      <a href="/impressum" class="hover:underline">Impressum</a>
+      <a href="/datenschutz" class="hover:underline">Datenschutz</a>
+    </nav>
+  </footer>
+</section>

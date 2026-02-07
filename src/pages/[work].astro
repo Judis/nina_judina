@@ -1,0 +1,117 @@
+---
+import { client } from "../lib/strapi";
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const { data: artworks } = await client.collection("artworks").find();
+
+  return artworks.map((artwork) => ({
+    params: { work: artwork.documentId },
+  }));
+}
+
+const { work } = Astro.params;
+const { data: artwork } = await client.collection("artworks").findOne(work, {populate: "*"});
+const { data: artworks } = await client.collection("artworks").find({populate: "*"});
+
+const randomArtworks = artworks
+  .filter(a => a.id !== artwork.id)
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 6);
+
+const previousWork = artworks[artworks.findIndex(a => a.id === artwork.id) - 1] || null;
+const nextWork = artworks[artworks.findIndex(a => a.id === artwork.id) + 1] || null;
+---
+
+<Layout>
+  <!-- Back link -->
+  <div class="space-y-0">
+    <div class="mb-2">
+      <a href="/" class="text-xs text-neutral-500 hover:text-neutral-800 transition flex items-center gap-1">
+        ← Zurück zu den Gemälden
+      </a>
+    </div>
+    <div class="">
+      <h1 id="work-heading" class="text-sm font-medium tracking-[0.3em] uppercase">
+        {artwork.title}
+      </h1>
+    </div>
+  </div>
+
+  <!-- IMAGE + INFO BLOCK -->
+  <!-- <div class="flex flex-col md:flex-row gap-8 mb-12"> -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Large Image -->
+    <!-- <div class="flex-2 items-center justify-center"> -->
+    <div class="col-span-2">
+      <div class="w-full max-w-3xl bg-gradient-to-b from-neutral-200 to-neutral-300 rounded-xl overflow-hidden">
+        <img src={artwork.photo.url} alt={artwork.title} class="object-contain w-full h-full" />
+      </div>
+    </div>
+    <!-- Info Block -->
+    <div class="text-sm/6 text-neutral-600">
+      <h2 class="text-xs font-medium tracking-[0.2em] uppercase mb-4">Werkdetails</h2>
+      <dl class="grid grid-cols-2 gap-y-2 text-sm mb-16">
+        <dt class="font-medium text-neutral-500">Material</dt>
+        <dd class="text-neutral-600">{artwork.technique}</dd>
+
+        <dt class="font-medium text-neutral-500">Jahre</dt>
+        <dd class="text-neutral-600">{artwork.year}</dd>
+
+        <dt class="font-medium text-neutral-500">Größe</dt>
+        <dd class="text-neutral-600">{artwork.size}</dd>
+
+        <dt class="font-medium text-neutral-500">Ort</dt>
+        <dd class="text-neutral-600">{artwork.location}</dd>
+
+        <dt class="font-medium text-neutral-500">Status</dt>
+        <dd class="font-medium text-green-700">{artwork.sold ? "Verkauft" : "Verfügbar"}</dd>
+
+        <dt class="font-medium text-neutral-500">Preis</dt>
+        <dd class="font-medium text-neutral-600">auf Anfrage</dd>
+      </dl>
+
+      <!-- <h2 class="text-xs font-medium tracking-[0.2em] uppercase mb-4">Hinter dem Werk</h2> -->
+      <p class="text-xl font-serif italic mb-16">
+        {artwork.description}
+      </p>
+      <p class="text-center text-sm text-neutral-500">
+        Mehr Informationen oder<br />Fragen zu diesem Werk?<br>
+        <div class="flex justify-center">
+          <a href="#contact" class="mt-2 inline-block text-xs uppercase tracking-wider text-neutral-200 border border-neutral-900 bg-neutral-900 rounded-full px-4 py-2 hover:bg-neutral-700 transition">Kontakt</a>
+        </div>
+      </p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="col-span-2 flex justify-between text-xs text-neutral-500">
+      {previousWork ? (
+        <a href={`/${previousWork.documentId}`} class="hover:text-neutral-800 transition">← Vorheriges Werk</a>
+      ) : (
+        <span></span>
+      )}
+      {nextWork ? (
+        <a href={`/${nextWork.documentId}`} class="hover:text-neutral-800 transition">Nächstes Werk →</a>
+      ) : (
+        <span></span>
+      )}
+    </div>
+  </div>
+
+
+  <hr class="mb-8">
+
+  <!-- WEITERE WERKE -->
+  <section class="mb-8">
+    <h2 class="text-sm font-medium tracking-[0.2em] uppercase mb-4">Weitere Werke</h2>
+    <div class="grid grid-cols-4 sm:grid-cols-6 gap-6">
+      {randomArtworks.map((art) => (
+        <a href={`/${art.documentId}`} class="group block rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100 hover:shadow-lg transition">
+          <img src={STRAPI_URL + art.photo.url} alt={art.title} class="object-cover w-full aspect-[4/5] group-hover:scale-105 transition" />
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
