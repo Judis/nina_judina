@@ -9,5 +9,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://judis.github.io',
-  base: '/nina_hert_front'
+  base: '/nina_judina'
 });

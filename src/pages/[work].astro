@@ -27,7 +27,7 @@ const nextWork = artworks[artworks.findIndex(a => a.id === artwork.id) + 1] || n
   <!-- Back link -->
   <div class="space-y-0">
     <div class="mb-2">
-      <a href="/nina_hert_front/" class="text-xs text-neutral-500 hover:text-neutral-800 transition flex items-center gap-1">
+      <a href="/nina_judina/" class="text-xs text-neutral-500 hover:text-neutral-800 transition flex items-center gap-1">
         ← Zurück zu den Gemälden
       </a>
     </div>
@@ -88,12 +88,12 @@ const nextWork = artworks[artworks.findIndex(a => a.id === artwork.id) + 1] || n
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <div class="col-span-2 flex justify-between text-xs text-neutral-500">
       {previousWork ? (
-        <a href={`/nina_hert_front/${previousWork.documentId}`} class="hover:text-neutral-800 transition">← Vorheriges Werk</a>
+        <a href={`/nina_judina/${previousWork.documentId}`} class="hover:text-neutral-800 transition">← Vorheriges Werk</a>
       ) : (
         <span></span>
       )}
       {nextWork ? (
-        <a href={`/nina_hert_front/${nextWork.documentId}`} class="hover:text-neutral-800 transition">Nächstes Werk →</a>
+        <a href={`/nina_judina/${nextWork.documentId}`} class="hover:text-neutral-800 transition">Nächstes Werk →</a>
       ) : (
         <span></span>
       )}
@@ -108,7 +108,7 @@ const nextWork = artworks[artworks.findIndex(a => a.id === artwork.id) + 1] || n
     <h2 class="text-sm font-medium tracking-[0.2em] uppercase mb-4">Weitere Werke</h2>
     <div class="grid grid-cols-4 sm:grid-cols-6 gap-6">
       {randomArtworks.map((art) => (
-        <a href={`/nina_hert_front/${art.documentId}`} class="group block rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100 hover:shadow-lg transition">
+        <a href={`/nina_judina/${art.documentId}`} class="group block rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100 hover:shadow-lg transition">
           <img src={art.photo.url} alt={art.title} class="object-cover w-full aspect-[4/5] group-hover:scale-105 transition" />
         </a>
       ))}

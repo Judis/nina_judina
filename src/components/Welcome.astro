@@ -21,7 +21,7 @@ const { data: artworks } = await client.collection("artworks").find({
 			<article class={`group relative rounded-xl overflow-hidden bg-neutral-900 border border-white/80 hover:shadow-lg transition ${index >= 6 ? "hidden" : ""}`}
 							 data-work-index={index}>
 				<div class="aspect-[4/5] bg-gradient-to-b from-neutral-800 to-neutral-900">
-					<a href={"/nina_hert_front/" + artwork.documentId}>
+					<a href={"/nina_judina/" + artwork.documentId}>
 						<img
 							src={artwork.photo.url}
 							alt={artwork.title}
