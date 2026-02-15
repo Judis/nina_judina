@@ -1,4 +1,9 @@
 ---
+import { client } from "../lib/strapi";
+
+const { data: pages } = await client.collection("static-pages").find({
+  populate: "*",
+});
 ---
 <!-- Contact -->
 <section id="contact" aria-labelledby="contact-heading" class="space-y-6 pt-16">
@@ -57,8 +62,11 @@
   <footer class="border-t border-neutral-200 pt-8 mt-12 text-xs text-neutral-500 flex flex-col md:flex-row items-center justify-between gap-4">
     <span>&copy; 2025 Nina Judina. Alle Rechte vorbehalten.</span>
     <nav class="flex gap-4">
-      <a href="/impressum" class="hover:underline">Impressum</a>
-      <a href="/datenschutz" class="hover:underline">Datenschutz</a>
+      {pages.map((page, index) => (
+        <a href={"/nina_judina/" + page.slug} class="hover:underline">
+          {page.title}
+        </a>
+      ))}
     </nav>
   </footer>
 </section>

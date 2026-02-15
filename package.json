@@ -9,9 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@strapi/blocks-react-renderer": "^1.0.2",
     "@strapi/client": "^1.6.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.9",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tailwindcss": "^4.1.18"
   }
 }
